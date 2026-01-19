@@ -29,10 +29,15 @@ const createProblem = async (req,res)=>{
         const submissions = visibleTestCases.map((testcase)=>({
             source_code:completeCode,
             language_id: languageId,
-            stdin: testcase.input,
-            expected_output: testcase.output
+            // stdin: testcase.input,
+            // expected_output: testcase.output
+             // IMPORTANT FIXES 👇
+            stdin: testcase.input.trim(),
+            expected_output: testcase.output,
+            cpu_time_limit: 2,
+            memory_limit: 256000
         }));
-
+      // console.log(completeCode);
 
         const submitResult = await submitBatch(submissions);
         // console.log(submitResult);
